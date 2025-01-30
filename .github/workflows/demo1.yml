@@ -3,7 +3,19 @@ on:
   pull_request: 
     types:
       - opened
+    branches: 
+      - master
+      - 'dev-*'   # targets -> dev-new dev-this dev-that
+      - 'feat/**' # targets -> feat/new feat/new/button
   workflow_dispatch:
+  push:
+    branches: 
+      - master
+      - 'dev-*'   # targets -> dev-new dev-this dev-that
+      - 'feat/**' # targets -> feat/new feat/new/button
+      # will ignore branch like developer-1
+    paths-ignore: 
+      - '.github/workflows/*' # any changes here won't trigger the event
 jobs:
   deploy:
     runs-on: ubuntu-latest
